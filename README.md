@@ -7,13 +7,6 @@ A high-fidelity, interactive React wall calendar component inspired by the **Obs
 
 ---
 
-## 📽️ Video Demonstration
-
-> [!IMPORTANT]
-> **View the functional walkthrough here**: [INSERT_VIDEO_LINK_HERE (Loom/YouTube)]
-
----
-
 ## 🖼️ Preview
 
 <img width="1293" height="800" alt="image" src="https://github.com/user-attachments/assets/f36f243c-fa2d-4fab-99cd-d98db576b47a" />
