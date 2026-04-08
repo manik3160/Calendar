@@ -16,7 +16,8 @@ A high-fidelity, interactive React wall calendar component inspired by the **Obs
 
 ## 🖼️ Preview
 
-![Calendar Preview - Obsidian Dark Mode](INSERT_IMAGE_LINK_HERE)
+<img width="1293" height="800" alt="image" src="https://github.com/user-attachments/assets/f36f243c-fa2d-4fab-99cd-d98db576b47a" />
+
 
 ---
 
