@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# assistant artifacts
+.gemini
+code.html
+screen.png
+/src/components/WallCalendar/*.webp
+/src/components/WallCalendar/*.png
