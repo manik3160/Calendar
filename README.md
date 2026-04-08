@@ -1,36 +1,88 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Obsidian Wall Calendar - Interactive Edition
 
-## Getting Started
+[![GitHub stars](https://img.shields.io/github/stars/manik3160/Calendar?style=social)](https://github.com/manik3160/Calendar)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-First, run the development server:
+A high-fidelity, interactive React wall calendar component inspired by the **Obsidian Lens** design system. This project combines seasonal procedural art, persistent user notes, and Indian holiday data into a premium, responsive glassmorphic interface.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📽️ Video Demonstration
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+> [!IMPORTANT]
+> **View the functional walkthrough here**: [INSERT_VIDEO_LINK_HERE (Loom/YouTube)]
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🖼️ Preview
 
-To learn more about Next.js, take a look at the following resources:
+![Calendar Preview - Obsidian Dark Mode](INSERT_IMAGE_LINK_HERE)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## ✨ Features
 
-## Deploy on Vercel
+- **🌓 Dynamic Theming**: Toggle between "Ivory Light" and "Obsidian Dark" modes with a single tap.
+- **🎨 Seasonal Art**: Procedural SVG backgrounds that adapt to each month's unique aesthetic (e.g., "The Frost Cycle" for Jan, "The Ruby Harvest" for Sept).
+- **📅 Interactive Grid**: 
+  - **Range Selection**: Seamlessly select date ranges with intelligent start/end logic.
+  - **Today Quick-Jump**: Instantly return to the current date from anywhere in the calendar.
+- **📝 Persistent Notes**: 
+  - Date-specific and range-specific note-taking.
+  - State persistent via `localStorage`.
+  - Save via UI button or **Enter** key.
+- **🇮🇳 Holiday Data**: Built-in support for Indian national holidays with interactive descriptive popovers.
+- **📱 Responsive Layout**:
+  - **Desktop**: Iconic side-by-side segmentation of art, notes, and grid.
+  - **Mobile**: Gracefully stacked vertical layout with optimized touch targets.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🛠️ Technical Implementation
+
+### **Design Philosophy**
+The component was built to feel **premium and tactile**. We prioritized micro-animations, glassmorphism, and modern typography (Playfair Display & Crimson Pro) to evoke a "wall-mount" physical calendar feel.
+
+### **Tech Stack**
+- **Next.js 15 (App Router)**: Orchestrates the application structure and font optimization.
+- **Framer Motion**: Handles the fluid "page-flip" month transitions and interactive scale effects.
+- **Tailwind CSS**: A comprehensive utility-first design system using custom CSS variables for theme parity.
+- **Lucide React**: Clean, consistent iconography for navigation and sharing.
+- **Date-fns**: Robust date manipulation and formatting logic.
+
+---
+
+## 🚀 Getting Started
+
+To run the project locally, follow these steps:
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/manik3160/Calendar.git
+   cd Calendar
+   ```
+
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+
+3. **Run the development server**:
+   ```bash
+   npm run dev
+   ```
+
+4. **View in browser**:
+   Open [http://localhost:3000](http://localhost:3000) to interact with the calendar.
+
+---
+
+## 📬 Contact & Repo
+
+- **Repository**: [https://github.com/manik3160/Calendar.git](https://github.com/manik3160/Calendar.git)
+- **Author**: Manik
+
+---
+
+> [!TIP]
+> Use keyboard arrows (**Left/Right/Up/Down**) to navigate the calendar grid when focused! Press **'T'** to jump to today instantly.
