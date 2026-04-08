@@ -1,9 +1,9 @@
 "use client";
 
-import { useMemo, useRef } from "react";
+import { useMemo, useRef, useState } from "react";
 import { format } from "date-fns";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight, Share, Calendar as CalendarIcon } from "lucide-react";
+import { ChevronLeft, ChevronRight, Share, Check, Calendar as CalendarIcon } from "lucide-react";
 
 import { useCalendar } from "./useCalendar";
 import { useNotes } from "./useNotes";
@@ -27,6 +27,7 @@ export default function WallCalendar() {
   const notesProps = useNotes();
   const { focusRef } = useKeyboard(calendarProps);
   const noteInputRef = useRef(null);
+  const [showToast, setShowToast] = useState(false);
 
   const { month, year, slideDir, navigate, jumpToMonth, isToday } = calendarProps;
   
@@ -48,6 +49,26 @@ export default function WallCalendar() {
   const handleAddNoteFocus = () => {
     if (noteInputRef.current) {
       noteInputRef.current.focus();
+    }
+  };
+
+  const handleShare = async () => {
+    const shareData = {
+      title: 'Obsidian Wall Calendar',
+      text: `Check out the ${theme.title} Edition for ${format(new Date(year, month, 1), "MMMM yyyy")}`,
+      url: window.location.href,
+    };
+
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+      } else {
+        await navigator.clipboard.writeText(window.location.href);
+        setShowToast(true);
+        setTimeout(() => setShowToast(false), 2000);
+      }
+    } catch (err) {
+      console.error("Error sharing:", err);
     }
   };
 
@@ -172,7 +193,11 @@ export default function WallCalendar() {
                     <span className="text-[9px] md:text-[10px] font-bold text-on-surface-variant tracking-widest uppercase">Holiday</span>
                   </div>
                 </div>
-                <button className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 md:py-2.5 bg-surface-container-highest rounded-2xl text-[11px] md:text-xs font-bold transition-all border border-secondary/20 hover:border-secondary hover:bg-secondary/10 active:scale-95" style={{ color: "var(--wc-secondary)" }}>
+                <button 
+                  onClick={handleShare}
+                  className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 md:py-2.5 bg-surface-container-highest rounded-2xl text-[11px] md:text-xs font-bold transition-all border border-secondary/20 hover:border-secondary hover:bg-secondary/10 active:scale-95" 
+                  style={{ color: "var(--wc-secondary)" }}
+                >
                   <Share className="w-4 h-4" />
                   SHARE EDITION
                 </button>
@@ -182,6 +207,22 @@ export default function WallCalendar() {
         </AnimatePresence>
       </div>
       
+      <AnimatePresence>
+        {showToast && (
+          <motion.div
+            initial={{ opacity: 0, y: 20, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.9 }}
+            className="fixed bottom-12 left-1/2 -translate-x-1/2 z-[100] flex items-center gap-3 px-6 py-3 rounded-2xl bg-surface-container-highest/80 backdrop-blur-xl border border-outline-variant shadow-2xl"
+          >
+            <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center">
+              <Check className="w-4 h-4 text-primary" />
+            </div>
+            <span className="text-sm font-bold text-on-surface tracking-wide">Link copied to clipboard</span>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <div className="absolute -bottom-16 left-1/2 -translate-x-1/2 w-4/5 h-12 bg-black/40 blur-3xl -z-10 rounded-full"></div>
     </div>
   );
