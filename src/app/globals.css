@@ -1,26 +1,100 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-surface-container: var(--wc-surface-container);
+  --color-surface-container-highest: var(--wc-surface-container-highest);
+  --color-surface-container-low: var(--wc-surface-container-low);
+  --color-surface-container-lowest: var(--wc-surface-container-lowest);
+  --color-primary: var(--wc-primary);
+  --color-primary-dim: var(--wc-primary-dim);
+  --color-secondary: var(--wc-secondary);
+  --color-tertiary: var(--wc-tertiary);
+  --color-outline-variant: var(--wc-outline-variant);
+  --color-on-surface: var(--wc-on-surface);
+  --color-on-surface-variant: var(--wc-on-surface-variant);
+  
+  --font-headline: var(--font-playfair);
+  --font-body: var(--font-crimson);
+  --font-handwriting: var(--font-homemade);
+
+  --animate-fade-in: fade-in 1s ease-out forwards;
+  --animate-slide-in-from-bottom-8: slide-in-from-bottom-8 1s ease-out forwards;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-in-from-bottom-8 {
+  from { transform: translateY(2rem); }
+  to { transform: translateY(0); }
+}
+
+:root {
+  /* LIGHT Theme Base (warm cream/ivory palette) */
+  --wc-bg: #fdf8f0;
+  --wc-surface-container: #ffffff;
+  --wc-surface-container-highest: #f1ebd9; 
+  --wc-surface-container-low: #f8f3e6;
+  --wc-surface-container-lowest: #fdf8f0;
+  --wc-outline-variant: rgba(213, 207, 193, 0.4);
+  --wc-on-surface: #3d2e1e;
+  --wc-on-surface-variant: #6b5c47;
+  
+  /* Shared primary accents - Overridden by theme usually, but defaults here */
+  --wc-primary: #ba9eff;
+  --wc-primary-dim: #8455ef;
+  --wc-secondary: #2db7f2;
+  --wc-tertiary: #ff86c3;
+
+  --binding-ring-bg: linear-gradient(180deg, rgba(180,140,80,0.5) 0%, rgba(200,160,100,0.5) 50%, rgba(180,140,80,0.5) 100%);
+  --binding-ring-border: rgba(180,140,80,0.5);
+  --shadow-card: 0 20px 60px rgba(0,0,0,0.15);
+}
+
+:root.dark {
+  /* Dark Theme Base (Obsidian) */
+  --wc-bg: #0c0e12;
+  --wc-surface-container: #171a1f;
+  --wc-surface-container-highest: #23262c;
+  --wc-surface-container-low: #111318;
+  --wc-surface-container-lowest: #000000;
+  --wc-outline-variant: #46484d;
+  --wc-on-surface: #f6f6fc;
+  --wc-on-surface-variant: #aaabb0;
+
+  --binding-ring-bg: linear-gradient(180deg, #23262c 0%, #46484d 50%, #111318 100%);
+  --binding-ring-border: rgba(255,255,255,0.05);
+  --shadow-card: 0 64px 128px -32px rgba(0,0,0,0.8);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--wc-bg);
+  color: var(--wc-on-surface);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  transition: background-color 0.6s ease, color 0.6s ease;
+}
+
+:root.dark body {
+  background: radial-gradient(circle at center, #1a1c23 0%, #0c0e12 100%);
+}
+
+.binding-ring {
+  background: var(--binding-ring-bg);
+  box-shadow: inset 0 1px 1px rgba(255,255,255,0.1);
+  border-color: var(--binding-ring-border);
+}
+
+.note-line {
+  border-bottom: 1px solid color-mix(in srgb, var(--wc-on-surface-variant) 15%, transparent);
+  height: 2.5rem;
+}
+@media (min-width: 768px) {
+  .note-line { height: 2rem; }
+}
+
+.shadow-card {
+  box-shadow: var(--shadow-card);
 }
