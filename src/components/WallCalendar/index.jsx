@@ -87,21 +87,21 @@ export default function WallCalendar() {
       
       <ThemeToggle />
 
-      <div className="absolute -top-6 left-0 right-0 flex justify-around px-8 md:px-12 z-20 pointer-events-none">
+      <div className="absolute -top-6 left-0 right-0 flex justify-around px-8 md:px-12 z-20 pointer-events-none drop-shadow-xl">
         <div className="flex gap-3 md:gap-16">
-          <div className="w-2 md:w-3 h-10 md:h-12 binding-ring rounded-full shadow-lg border"></div>
-          <div className="w-2 md:w-3 h-10 md:h-12 binding-ring rounded-full shadow-lg border"></div>
-          <div className="w-2 md:w-3 h-10 md:h-12 binding-ring rounded-full shadow-lg border"></div>
+          <div className="binding-ring-wrapper"><div className="binding-hole"></div><div className="w-2 md:w-3 h-10 md:h-12 binding-ring rounded-full border"></div></div>
+          <div className="binding-ring-wrapper"><div className="binding-hole"></div><div className="w-2 md:w-3 h-10 md:h-12 binding-ring rounded-full border"></div></div>
+          <div className="binding-ring-wrapper"><div className="binding-hole"></div><div className="w-2 md:w-3 h-10 md:h-12 binding-ring rounded-full border"></div></div>
         </div>
         <div className="hidden xs:flex gap-3 md:gap-16">
-          <div className="w-2 md:w-3 h-10 md:h-12 binding-ring rounded-full shadow-lg border"></div>
-          <div className="w-2 md:w-3 h-10 md:h-12 binding-ring rounded-full shadow-lg border"></div>
-          <div className="w-2 md:w-3 h-10 md:h-12 binding-ring rounded-full shadow-lg border"></div>
+          <div className="binding-ring-wrapper"><div className="binding-hole"></div><div className="w-2 md:w-3 h-10 md:h-12 binding-ring rounded-full border"></div></div>
+          <div className="binding-ring-wrapper"><div className="binding-hole"></div><div className="w-2 md:w-3 h-10 md:h-12 binding-ring rounded-full border"></div></div>
+          <div className="binding-ring-wrapper"><div className="binding-hole"></div><div className="w-2 md:w-3 h-10 md:h-12 binding-ring rounded-full border"></div></div>
         </div>
         <div className="flex gap-3 md:gap-16">
-          <div className="w-2 md:w-3 h-10 md:h-12 binding-ring rounded-full shadow-lg border"></div>
-          <div className="w-2 md:w-3 h-10 md:h-12 binding-ring rounded-full shadow-lg border"></div>
-          <div className="w-2 md:w-3 h-10 md:h-12 binding-ring rounded-full shadow-lg border"></div>
+          <div className="binding-ring-wrapper"><div className="binding-hole"></div><div className="w-2 md:w-3 h-10 md:h-12 binding-ring rounded-full border"></div></div>
+          <div className="binding-ring-wrapper"><div className="binding-hole"></div><div className="w-2 md:w-3 h-10 md:h-12 binding-ring rounded-full border"></div></div>
+          <div className="binding-ring-wrapper"><div className="binding-hole"></div><div className="w-2 md:w-3 h-10 md:h-12 binding-ring rounded-full border"></div></div>
         </div>
       </div>
 
@@ -115,31 +115,34 @@ export default function WallCalendar() {
             animate="center"
             exit="exit"
             transition={{ duration: 0.38, ease: [0.4, 0, 0.2, 1] }}
-            className="bg-surface-container rounded-3xl md:rounded-[2.5rem] overflow-hidden shadow-card flex flex-col md:flex-row min-h-[600px] md:min-h-[800px] border border-outline-variant/20 relative"
+            className="paper-stack rounded-3xl md:rounded-[2.5rem] flex flex-col md:flex-row min-h-[600px] md:min-h-[800px] relative"
           >
-            <div className="w-full md:w-1/2 flex flex-col relative border-b md:border-b-0 md:border-r border-outline-variant/10">
-              <div className="relative min-h-[160px] sm:min-h-[240px] md:h-2/3">
-                <HeroArt theme={theme} isDarkMode={true} />
-                
-                <div className="relative h-full p-6 md:p-12 flex flex-col justify-end pointer-events-none z-10 text-shadow-md">
-                  <span className="font-headline font-extrabold text-5xl md:text-8xl tracking-tighter mb-1 md:mb-2 drop-shadow-2xl" style={{ color: theme.accent }}>
-                    {format(new Date(year, month, 1), "MMM").toUpperCase()}
-                  </span>
-                  <h2 className="text-on-surface font-headline font-bold text-2xl md:text-4xl mb-1 md:mb-2">{theme.title}</h2>
-                  <p className="text-on-surface-variant max-w-xs text-xs md:text-base leading-relaxed font-body font-medium">{theme.subtitle}</p>
-                </div>
-              </div>
+            <div className="absolute inset-0 bg-surface-container rounded-3xl md:rounded-[2.5rem] overflow-hidden flex flex-col md:flex-row border border-outline-variant/20">
+              <div className="paper-texture"></div>
               
-              <NotesPanel 
-                {...notesProps} 
-                rangeStart={calendarProps.rangeStart} 
-                rangeEnd={calendarProps.rangeEnd} 
-                theme={theme}
-                inputRef={noteInputRef}
-              />
-            </div>
+              <div className="w-full md:w-1/2 flex flex-col relative border-b md:border-b-0 md:border-r border-outline-variant/10 shadow-[2px_0_10px_rgba(0,0,0,0.1)]">
+                <div className="relative min-h-[160px] sm:min-h-[240px] md:h-2/3">
+                  <HeroArt theme={theme} isDarkMode={true} />
+                  
+                  <div className="relative h-full p-6 md:p-12 flex flex-col justify-end pointer-events-none z-10 text-shadow-md">
+                    <span className="font-headline font-extrabold text-5xl md:text-8xl tracking-tighter mb-1 md:mb-2 drop-shadow-2xl" style={{ color: theme.accent }}>
+                      {format(new Date(year, month, 1), "MMM").toUpperCase()}
+                    </span>
+                    <h2 className="text-on-surface font-headline font-bold text-2xl md:text-4xl mb-1 md:mb-2">{theme.title}</h2>
+                    <p className="text-on-surface-variant max-w-xs text-xs md:text-base leading-relaxed font-body font-medium">{theme.subtitle}</p>
+                  </div>
+                </div>
+                
+                <NotesPanel 
+                  {...notesProps} 
+                  rangeStart={calendarProps.rangeStart} 
+                  rangeEnd={calendarProps.rangeEnd} 
+                  theme={theme}
+                  inputRef={noteInputRef}
+                />
+              </div>
 
-            <div className="w-full md:w-1/2 p-6 md:p-12 bg-surface-container-low flex flex-col relative">
+              <div className="w-full md:w-1/2 p-6 md:p-12 bg-surface-container-low flex flex-col relative z-20">
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 md:mb-12 gap-6 relative z-10">
                 <div>
                   <h3 className="text-3xl md:text-4xl font-headline font-bold text-on-surface">
@@ -212,6 +215,7 @@ export default function WallCalendar() {
                   SHARE EDITION
                 </button>
               </div>
+            </div>
             </div>
           </motion.div>
         </AnimatePresence>
