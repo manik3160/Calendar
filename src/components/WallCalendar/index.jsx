@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState, useEffect } from "react";
 import { format } from "date-fns";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, Share, Check, Calendar as CalendarIcon } from "lucide-react";
@@ -9,6 +9,7 @@ import { useCalendar } from "./useCalendar";
 import { useNotes } from "./useNotes";
 import { useKeyboard } from "./useKeyboard";
 import { getThemeForMonth } from "./themes";
+import { playFlipSound } from "./useSound";
 
 import HeroArt from "./HeroArt";
 import CalendarGrid from "./CalendarGrid";
@@ -17,9 +18,9 @@ import RangeSummaryBar from "./RangeSummaryBar";
 import ThemeToggle from "./ThemeToggle";
 
 const flipVariants = {
-  enter: (dir) => ({ rotateY: dir > 0 ? 90 : -90, opacity: 0, scale: 0.95, transformOrigin: dir > 0 ? "left center" : "right center" }),
-  center: { rotateY: 0, opacity: 1, scale: 1, transformOrigin: "center center" },
-  exit:  (dir) => ({ rotateY: dir > 0 ? -90 : 90, opacity: 0, scale: 0.95, transformOrigin: dir > 0 ? "right center" : "left center" }),
+  enter: (dir) => ({ rotateX: dir > 0 ? -90 : 90, opacity: 0, scale: 0.95, transformOrigin: "top center" }),
+  center: { rotateX: 0, opacity: 1, scale: 1, transformOrigin: "top center" },
+  exit:  (dir) => ({ rotateX: dir > 0 ? 90 : -90, opacity: 0, scale: 0.95, transformOrigin: "top center" }),
 };
 
 export default function WallCalendar() {
@@ -27,10 +28,19 @@ export default function WallCalendar() {
   const notesProps = useNotes();
   const { focusRef } = useKeyboard(calendarProps);
   const noteInputRef = useRef(null);
+  const isFirstMount = useRef(true);
   const [showToast, setShowToast] = useState(false);
 
   const { month, year, slideDir, navigate, jumpToMonth, isToday } = calendarProps;
   
+  useEffect(() => {
+    if (isFirstMount.current) {
+        isFirstMount.current = false;
+        return;
+    }
+    playFlipSound();
+  }, [month, year]);
+
   const theme = useMemo(() => getThemeForMonth(month), [month]);
 
   const realMonth = new Date().getMonth();
